@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import Joi from "joi";
 
 type Planet = {
     id: number,
@@ -28,14 +29,25 @@ const getOneById = (req: Request, res: Response) => {
     res.status(200).json(planet);
 }
 
+const planetSchema = Joi.object({
+    id: Joi.number().integer().required(),
+    string: Joi.string().required()
+});
+
 const create = (req: Request, res: Response) => {
     const {id, name} = req.body;
     const newPlanet = {id, name};
-    planets = [...planets, newPlanet];
+    const validateNewPlanet = planetSchema.validate(newPlanet);
+
+    if (validateNewPlanet.error) {
+        return res.status(400).json({ message: validateNewPlanet.error });
+    } else {
+       planets = [...planets, newPlanet];
   
-    console.log(planets);
+        console.log(planets);
   
-    res.status(201).json({ message: "New planet was created"});
+        res.status(201).json({ message: "New planet was created"}); 
+    }    
 }
 
 const updateById = (req: Request, res: Response) => {
