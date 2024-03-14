@@ -3,7 +3,7 @@ import 'dotenv/config';
 import express from 'express';
 import "express-async-errors";
 import morgan from "morgan";
-import {getAll, getOneById, create, updateById, deleteById } from "./controllers/planets.js"
+import {getAll, getOneById, create, updateById, deleteById } from "./controllers_pg/planets_pg.js"
 
 const app = express()
 
