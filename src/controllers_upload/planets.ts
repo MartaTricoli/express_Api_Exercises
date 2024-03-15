@@ -85,4 +85,4 @@ export {
     createImage
 }
 
-//per l'utilizzo delle funzioni esportate: server_pg.js
+
